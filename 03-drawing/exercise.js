@@ -13,24 +13,13 @@ const mouseupStream = Rx.Observable.fromEvent(canvas, "mouseup")
 const mousedownStream = Rx.Observable.fromEvent(canvas, "mousedown")
 const mousemoveStream = Rx.Observable.fromEvent(canvas, "mousemove")
 
-let drawStream = mousedownStream
-  .flatMap(e => {
-    return mousemoveStream
-      .takeUntil(mouseupStream)
-      .scan((acc, v) => {
-        return {
-          prev: acc.current,
-          current: v,
-        }
-      }, {prev: null, current: e})
-  })
+drawLine(10, 10, 100, 100)
+
+/*
+const drawStream = ...
 
 drawStream
   .subscribe(v => {
-    drawLine(
-      v.prev.offsetX,
-      v.prev.offsetY,
-      v.current.offsetX,
-      v.current.offsetY
-    )
+    drawLine(...)
   })
+*/
